@@ -42,10 +42,10 @@ namespace RealEstate_Dapper_Api.Repositories.WhoWeAreRepository
         public async Task<List<ResultWhoWeAreDetailDto>> GetAllWhoWeAreDetailAsync()
         {
             string query = "Select * From WhoWeAreDetail";
-            using ( var connection = _context.CreateConnection())
+            using (var connection = _context.CreateConnection())
             {
-                var values= await connection.QueryAsync<ResultWhoWeAreDetailDto>(query);    
-                return values.ToList(); 
+                var values = await connection.QueryAsync<ResultWhoWeAreDetailDto>(query);
+                return values.ToList();
             }
         }
 

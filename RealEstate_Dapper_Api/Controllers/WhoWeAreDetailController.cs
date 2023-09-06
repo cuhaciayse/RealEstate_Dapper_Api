@@ -17,10 +17,10 @@ namespace RealEstate_Dapper_Api.Controllers
             _whoWeAreDetailRepository = whoWeAreDetailRepository;
         }
 
-        [HttpGet]   
+        [HttpGet]
         public async Task<IActionResult> WhoWeAreDetailList()
         {
-            var values=_whoWeAreDetailRepository.GetAllWhoWeAreDetailAsync();   
+            var values = await _whoWeAreDetailRepository.GetAllWhoWeAreDetailAsync();
             return Ok(values);
         }
         [HttpPost]  
