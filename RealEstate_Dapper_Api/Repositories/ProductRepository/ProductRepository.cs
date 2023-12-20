@@ -33,5 +33,16 @@ namespace RealEstate_Dapper_Api.Repositories.ProductRepository
                 return values.ToList();
             }
         }
+
+        public async Task<IEnumerable<ResultProductDto>> SearchProductsByCityAsync(string city)
+        {
+            string query = "SELECT * FROM Product WHERE City = @City";
+
+            using (var connection = _context.CreateConnection())
+            {
+                var values = await connection.QueryAsync<ResultProductDto>(query, new { City = city });
+                return values.ToList();
+            }
+        }
     }
 }

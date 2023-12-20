@@ -27,5 +27,29 @@ namespace RealEstate_Dapper_Api.Controllers
             var values = await _productRepository.GetAllProductWithCategoryAsync();
             return Ok(values);
         }
+
+        [HttpGet("SearchByCity")]
+        public async Task<IActionResult> SearchByCity([FromQuery] string city)
+        {
+            try
+            {
+                var products = await _productRepository.SearchProductsByCityAsync(city);
+
+                if (products != null && products.Any())
+                {
+                    return Ok(products);
+                }
+                else
+                {
+                    return NotFound($"Şehir bulunamadı: {city}");
+                }
+            }
+            catch (Exception ex)
+            {
+                // Log the exception
+                return StatusCode(StatusCodes.Status500InternalServerError, "Sunucu Hatası");
+            }
+        }
+
     }
 }
