@@ -23,13 +23,13 @@ namespace RealEstate_Dapper_Api.Controllers
             var values = await _whoWeAreDetailRepository.GetAllWhoWeAreDetailAsync();
             return Ok(values);
         }
-        [HttpPost]  
+        [HttpPost]
         public async Task<IActionResult> CreateWhoWeAreDetail(CreateWhoWeAreDetailDto createWhoWeAreDetailDto)
         {
             _whoWeAreDetailRepository.CreateWhoWeAreDetail(createWhoWeAreDetailDto);
             return Ok("Hakkımızda Kısmı Başarılı Bir Şekilde Eklendi");
         }
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteWhoWeAreDetail (int id)
         {
             _whoWeAreDetailRepository.DeleteWhoAreDetail(id);
