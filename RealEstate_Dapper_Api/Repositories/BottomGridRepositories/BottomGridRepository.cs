@@ -13,14 +13,27 @@ namespace RealEstate_Dapper_Api.Repositories.BottomGridRepository
             _context = context;
         }
 
-        public void CreateBottomGrid(CreateBottomGridDto createBottomGridDto)
+        public async void CreateBottomGrid(CreateBottomGridDto createBottomGridDto)
         {
-            throw new NotImplementedException();
+            string query = " insert into BottomGrid (Icon, Title, Description) values (@Icon, @Title, @Description)";
+            using(var connection=_context.CreateConnection())
+            {
+                await connection.ExecuteAsync(query, new
+                {
+                    createBottomGridDto.Icon,
+                    createBottomGridDto.Title,
+                    createBottomGridDto.Description
+                });
+            }
         }
 
-        public void DeleteBottomGrid(int id)
+        public async void DeleteBottomGrid(int id)
         {
-            throw new NotImplementedException();
+            string query = " Delete From BottomGrid where BottomGridID=@BottomGridID";
+            using(var connection=_context.CreateConnection()) 
+            {
+                await connection.ExecuteAsync(query, new { BottomGridID = id });  
+            }
         }
 
         public async Task<List<ResultBottomGridDto>> GetAllBottomGridAsync()
@@ -33,14 +46,21 @@ namespace RealEstate_Dapper_Api.Repositories.BottomGridRepository
             }
         }
 
-        public Task<GetBottomGridDto> GetBottomGrid(int id)
+        public async Task<GetBottomGridDto> GetBottomGrid(int id)
         {
-            throw new NotImplementedException();
+            string query = " Select * From BottomGrid where BottomGridID=@BottomGridID";
+            using (var connection=_context.CreateConnection()) {
+                var values = await connection.QueryFirstOrDefault(query);
+                return values.FirstOrDefault();
+               }
         }
 
-        public void UpdateBottomGrid(UpdateBottomGridDto updateBottomGridDto)
+        public async void UpdateBottomGrid(UpdateBottomGridDto updateBottomGridDto)
         {
-            throw new NotImplementedException();
+            using(var connection=_context.CreateConnection())
+            {
+                await connection.ExecuteAsync("Update BottomGrid Set Icon=@Icon, Title=@Title, Description=@Description where BottomGridID=@BottomGridID", updateBottomGridDto);
+            }
         }
     }
 }
