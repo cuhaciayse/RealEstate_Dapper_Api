@@ -10,5 +10,6 @@ namespace RealEstate_Dapper_Api.Repositories.ProductRepository
         Task<IEnumerable<ResultProductDto>> SearchProductsByCityAsync(string city);
         void ProductDealOfTheDayStatusChangeToTrue(int id);
         void ProductDealOfTheDayStatusChangeToFalse(int id);
+        Task<List<ResultLast5ProductWithCategoryDto>> GetLast5ProductAsync();
     }
 }
